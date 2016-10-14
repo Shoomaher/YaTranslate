@@ -1,10 +1,8 @@
 #!/usr/bin/python
-#Консольный клиент яндекс переводчика
-#Добавить выбор языка, на который надо перевести
-#Вроде работает
+#version 1.0
 import requests
 import sys
-apiKey = 'trnsl.1.1.20160706T204549Z.84253c772de42df6.028c405a4bd4ce5630737bfa37ed29665a071282'
+apiKey = '<insert your Yandex ApiKey here>'
 text = ''
 lang = ' '
 for par in sys.argv[1:]:
