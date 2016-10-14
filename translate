@@ -1,0 +1,25 @@
+#!/usr/bin/python
+#Консольный клиент яндекс переводчика
+#Добавить выбор языка, на который надо перевести
+#Вроде работает
+import requests
+import sys
+apiKey = 'trnsl.1.1.20160706T204549Z.84253c772de42df6.028c405a4bd4ce5630737bfa37ed29665a071282'
+text = ''
+lang = ' '
+for par in sys.argv[1:]:
+	if '--' in par:
+		lang = par[2:]
+	else:
+		text += par
+		text += ' '
+setup = {'key' : apiKey, 'text' : text, 'lang' : lang, 'format' : 'plain', 'options' : '', 'callback' : 'call'}
+r = requests.get('https://translate.yandex.net/api/v1.5/tr.json/translate', params = setup)
+codePos = r.text.index('"code') + 7
+code = r.text[codePos : codePos + 3]
+code = int(code)
+if code == 200:
+	posText = (r.text).index('"text"') + 9
+	print(r.text[posText : -4])
+else:
+	print('Error ' + str(code))
