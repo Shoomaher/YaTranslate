@@ -15,9 +15,8 @@ setup = {'key' : apiKey, 'text' : text, 'lang' : lang, 'format' : 'plain', 'opti
 r = requests.get('https://translate.yandex.net/api/v1.5/tr.json/translate', params = setup)
 codePos = r.text.index('"code') + 7
 code = r.text[codePos : codePos + 3]
-code = int(code)
 if code == 200:
 	posText = (r.text).index('"text"') + 9
 	print(r.text[posText : -4])
 else:
-	print('Error ' + str(code))
+	print('Error ' + code)
